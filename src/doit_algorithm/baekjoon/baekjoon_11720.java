@@ -1,0 +1,22 @@
+package doit_algorithm.baekjoon;
+
+import java.util.Scanner;
+
+public class baekjoon_11720 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		
+		String sNum = sc.next();
+		char[] cNum = sNum.toCharArray();
+		
+		int sum = 0;
+		for(int i : cNum) {
+			sum += i - '0';
+		}
+		
+		System.out.println(sum);
+	}
+
+}
