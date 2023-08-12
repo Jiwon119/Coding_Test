@@ -17,19 +17,27 @@ DFS와 BFS
 
 public class baekjoon_1260 {
 	static int n, m, v;
-	static int[] dfsArr, bfsArr;
+	static ArrayList<Integer> dfsArr, bfsArr;
 	static boolean[] visited;
-	static ArrayList<ArrayList<Integer>> data = new ArrayList<ArrayList<Integer>>();
+	static ArrayList<ArrayList<Integer>> data;
 	
 	public static void dfs(int num, int curIdx) {
-		if(curIdx == n) {
-			
+		dfsArr.add(curIdx, num);
+		visited[num] = true;
+		
+		if(curIdx == n-1 || curIdx == m) {
+			System.out.println(dfsArr);
 			return;
 		}
 		
-
-		
-		
+		data.get(num).sort(null);
+		for (int i = 0; i < data.get(num).size(); i++) {
+			int temp = data.get(num).get(i);
+			if(!visited[temp]) {
+				dfs(temp, curIdx+1);
+				break;
+			}
+		}
 	}
 	
 	public static void bfs() {
@@ -45,19 +53,23 @@ public class baekjoon_1260 {
 		
 //		HashMap<Integer, V>
 //		int[][] data = new int[m][2];
-		dfsArr = new int[n];
-		bfsArr = new int[n];
-		visited = new boolean[m];
+		dfsArr = new ArrayList<Integer>();
+		bfsArr = new ArrayList<Integer>();
+		visited = new boolean[n+1];
+		data = new ArrayList<ArrayList<Integer>>();
 		
-		data.add(0, null);
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < n+1; i++) {
+			data.add(i, new ArrayList<Integer>());
+		}
+
+		for (int i = 0; i < m; i++) {
 			tk = new StringTokenizer(br.readLine());
 			int a = Integer.parseInt(tk.nextToken());
 			int b = Integer.parseInt(tk.nextToken());
-			
-
+			data.get(a).add(b);
+			data.get(b).add(a);
 		}
-
+		dfs(v,0);
 		
 	}
 }
